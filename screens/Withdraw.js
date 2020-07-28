@@ -1,8 +1,6 @@
 import React , {useState} from  'react';
-import { Modal, Text, View ,StyleSheet} from 'react-native';
+import { Modal, Text, View } from 'react-native';
 import {TextInput,HelperText, Button} from 'react-native-paper';
-import { createStore } from 'redux';
-import { Modal } from 'react-responsive-modal';
 
 export default function Withdraw({route,navigation}) {
   const  {cardId}  = route.params;

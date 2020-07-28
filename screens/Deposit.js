@@ -82,7 +82,6 @@ const redirectToScanQRCode=()=>{
 }
  return (
     <View>
-
       <TextInput keyboardType={'numeric'} value = {amount} label="Amount to Deposit" value={amount} onChangeText={onChangeAmount} />
       <HelperText type="error" visible={hasErrors()}>
         Enter valid amount to be deposited

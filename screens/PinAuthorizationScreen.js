@@ -1,29 +1,51 @@
 import React , {useState} from  'react';
-import { Modal, Text, View,Alert } from 'react-native';
-import {TextInput,HelperText, Button} from 'react-native-paper';
+import { Button, Text, View,SafeAreaView } from 'react-native';
+import {
+  CodeField,
+  Cursor,
+  useBlurOnFulfill,
+  useClearByFocusCell,
+} from 'react-native-confirmation-code-field';
+import styles from './styles';
+const CELL_COUNT = 4;
+
+
+
 
 export default function PinAuthorizationScreen({route,navigation}) {
-  // const [text, setText] = React.useState('');
-  // const hasUnsavedChanges = Boolean(text);
+    const [enableMask, setEnableMask] = useState(true);
+    const [value, setValue] = useState('');
+    const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
+    const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+      value,
+      setValue,
+    });
+    const toggleMask = () => setEnableMask(f => !f);
+    const renderCell = ({index, symbol, isFocused}) => {
+      let textChild = null;
   
+      if (symbol) {
+        textChild = enableMask ? '•' : symbol;
+      } else if (isFocused) {
+        textChild = <Cursor />;
+      }
+  
+
   React.useEffect(() => {
     setBarcodeScanned()
   }, []);
 
-  // React.useEffect(
-  //   () =>
-  //     navigation.addListener('beforeRemove', (e) => {
-  //       e.preventDefault();
-  //       Alert.alert(
-  //         'Cant Go back',
-  //         'You have scanned the QRCode in the ATM. Going back would destroy the session',
-  //         [
-  //           { text: "OK", style: 'cancel', onPress: () => {} },
-  //         ]
-  //       );
-  //     }),
-  //   [navigation, hasUnsavedChanges]
-  // );
+
+
+  return (
+    <Text
+      key={index}
+      style={[styles.cell, isFocused && styles.focusCell]}
+      onLayout={getCellOnLayoutHandler(index)}>
+      {textChild}
+    </Text>
+  );
+};
 
 
   const  {cardId}  = route.params;
@@ -80,17 +102,24 @@ export default function PinAuthorizationScreen({route,navigation}) {
   }
 
  return (
-    <View>
-      <TextInput  keyboardType={'numeric'} secureTextEntry={true} value = {inputPin} label="Enter PIN" onChangeText={onChangePin} />
-      <Modal transparent={true} visible= {isVisible} >
-        <View style = {{backgroundColor:"#000000aa", flex:1}}>
-        <View style = {{backgroundColor:"#ffffff", height: 10,marginLeft:20, marginRight:20,marginTop:275,marginBottom:275,padding:20, borderRadius:20, flex: 1}}>
-        <Text style = {{ fontSize: 30, margin:40 , textAlign:'center'}}>Pin does not match</Text>
-        <Button mode="contained" onPress= {()=>{setVisible(false)}}>Ok</Button>
-        </View>
-        </View>
-      </Modal>
-      <Button onPress={() => {authorizePinFromCardId()}}>OK</Button>
-    </View>
+  <SafeAreaView style={styles.root}>
+  <Text style={styles.title}>Enter Pin</Text>
+  <View style={styles.fieldRow}>
+    <CodeField
+      ref={ref}
+      {...props}
+      value={inputPin}
+      onChangeText={setInputPin}
+      cellCount={CELL_COUNT}
+      keyboardType="number-pad"
+      textContentType="oneTimeCode"
+      renderCell={renderCell}
+    />
+    <Text style={styles.toggle} onPress={toggleMask}>
+      {enableMask ? '🙈' : '🐵'}
+    </Text>
+  </View>
+  <Button onPress={() => {authorizePinFromCardId()}} title = "OK "> </Button>
+</SafeAreaView>
   );
 };
