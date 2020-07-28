@@ -81,7 +81,7 @@ export default function PinAuthorizationScreen({route,navigation}) {
 
  return (
     <View>
-      <TextInput  value = {inputPin} label="Enter PIN" onChangeText={onChangePin} />
+      <TextInput  keyboardType={'numeric'} secureTextEntry={true} value = {inputPin} label="Enter PIN" onChangeText={onChangePin} />
       <Modal transparent={true} visible= {isVisible} >
         <View style = {{backgroundColor:"#000000aa", flex:1}}>
         <View style = {{backgroundColor:"#ffffff", height: 10,marginLeft:20, marginRight:20,marginTop:275,marginBottom:275,padding:20, borderRadius:20, flex: 1}}>

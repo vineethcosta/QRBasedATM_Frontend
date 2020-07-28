@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, Alert, View } from 'react-native';
-import {Card, Button} from 'react-native-paper'
-
+import { Text, Alert,StyleSheet, View } from 'react-native';
+import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 export default function HomeScreen({navigation,route}) {
   // const hasUnsavedChanges = Boolean(text);
   // const [text, setText] = React.useState('');
@@ -23,24 +22,23 @@ export default function HomeScreen({navigation,route}) {
   const { cardId } = route.params;
 
   return ( 
-    <View>
-      <Card>   
-    <Card.Actions style={{alignItems:'center', justifyContent: 'center'}} >
-      <Button mode="contained" style={{width:400, height: 25, backgroundColor : 'green',justifyContent: 'center' }} onPress={() => navigation.navigate('Withdraw',{cardId: cardId})}> Withdraw </Button>
-    </Card.Actions>
-  </Card>
-  <Card>
-    <Card.Cover />
-    <Card.Actions style={{alignItems:'center', justifyContent: 'center'}}>
-      <Button mode="contained" style={{width:400, height: 25, backgroundColor : 'green', justifyContent: 'center'}} onPress={()  => navigation.navigate('Deposit',{cardId: cardId})}>Deposit</Button>
-    </Card.Actions>
-  </Card> 
-  <Card>
-    <Card.Cover />
-    <Card.Actions style={{alignItems:'center', justifyContent: 'center'}}>
-      <Button mode="contained"  style={{width:400, height: 25 , backgroundColor : 'green', justifyContent: 'center'}} onPress={()  => navigation.navigate('BalanceEnquiry',{cardId: cardId})}>Balance Enquiry</Button>
-    </Card.Actions>
-    </Card>
-    </View>
+    <View style = {styles.container}>
+      <AwesomeButtonRick  onPress={() => navigation.navigate('Withdraw',{cardId: cardId})}>
+        <Text style={{width:200,textAlign:'center'}}>WITHDRAW</Text> 
+      </AwesomeButtonRick>
+      <AwesomeButtonRick onPress={()  => navigation.navigate('Deposit',{cardId: cardId})}>
+        <Text style={{width:200,textAlign:'center'}}>DEPOSIT</Text>
+      </AwesomeButtonRick>
+      <AwesomeButtonRick  onPress={()  => navigation.navigate('BalanceEnquiry',{cardId: cardId})}>
+        <Text style={{width:200,textAlign:'center'}}>BALANCE ENQUIRY</Text>
+      </AwesomeButtonRick>
+  </View>
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+    justifyContent:"center",
+    alignItems:"center"
+  },
+});

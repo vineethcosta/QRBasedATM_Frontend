@@ -6,7 +6,7 @@ export default function ScanQRCodeScreen({navigation}) {
  return (
      <View style = {styles.container}>
       <AwesomeButtonRick onPress={() => navigation.navigate('QRCodeScreen')}>
-       <Text> SCAN QR CODE</Text>
+       <Text style={{width:200,textAlign:'center'}}>SCAN QR CODE</Text>
       </AwesomeButtonRick>
     </View>
   );

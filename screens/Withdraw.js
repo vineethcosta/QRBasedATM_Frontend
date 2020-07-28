@@ -1,7 +1,8 @@
 import React , {useState} from  'react';
-import { Modal, Text, View } from 'react-native';
+import { Modal, Text, View ,StyleSheet} from 'react-native';
 import {TextInput,HelperText, Button} from 'react-native-paper';
 import { createStore } from 'redux';
+import { Modal } from 'react-responsive-modal';
 
 export default function Withdraw({route,navigation}) {
   const  {cardId}  = route.params;
@@ -83,13 +84,13 @@ export default function Withdraw({route,navigation}) {
 }
  return (
     <View>
-      <TextInput value = {amount} label="Amount to Withdraw" value={amount} onChangeText={onChangeAmount} />
+      <TextInput keyboardType={'numeric'} label="Amount to Withdraw" value={amount} onChangeText={onChangeAmount} />
       <HelperText type="error" visible={hasErrors()}>
         Enter valid amount to be withdrawn
       </HelperText>
       <Modal transparent={true} visible= {isVisible} >
         <View style = {{backgroundColor:"#000000aa", flex:1}}>
-        <View style = {{backgroundColor:"#ffffff", height: 10,marginLeft:20, marginRight:20,marginTop:275,marginBottom:275,padding:20, borderRadius:20, flex: 1}}>
+        <View style = {{backgroundColor:"#ffffff", height: 10,marginLeft:20, marginRight:20,marginTop:200,marginBottom:275,padding:20, borderRadius:20, flex: 1}}>
         <Text style = {{ fontSize: 30, margin:40 , textAlign:'center'}}>{output}</Text>
         <Button mode="contained" onPress= {()=>redirectToScanQRCode()}>OK</Button>
         </View>
@@ -99,3 +100,4 @@ export default function Withdraw({route,navigation}) {
     </View>
   );
 };
+
