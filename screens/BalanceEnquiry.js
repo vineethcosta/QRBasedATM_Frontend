@@ -73,9 +73,9 @@ export default function BalanceEnquiry({route,navigation}) {
     <View style={styles.container}>
       <Modal transparent={true} visible= {isVisible} >
         <View style = {{backgroundColor:"#000000aa", flex:1}}>
-        <View style = {{backgroundColor:"#ffffff", height: 10,marginLeft:20, marginRight:20,marginTop:275,marginBottom:275,padding:20, borderRadius:20, flex: 1}}>
-        <Text style = {{ fontSize: 30, margin:40 , textAlign:'center'}}>{balance}</Text>
-        <Icon name="check-circle" size={60}  onPress= {()=>redirectToScanQRCode()} />
+        <View style = {{backgroundColor:"#ffffff", height: 10,marginLeft:20, marginRight:20,marginTop:275,marginBottom:275,padding:20, borderRadius:20, flex: 1 , alignItems:"center"}}>
+        <Text style = {{ fontSize: 20, margin:40 , textAlign:'center', alignItems:"center"}}>{balance}</Text>
+        <Icon name="check-circle" size={60}  onPress= {()=>redirectToScanQRCode()}  />
         </View>
         </View>
       </Modal>

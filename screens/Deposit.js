@@ -62,25 +62,6 @@ export default function Deposit({route,navigation}) {
   })
 }
 
-const redirectToScanQRCode=()=>{
-  fetch('https://qrbasedatm.herokuapp.com/deleteSyncOnTransactionCompleted',{
-    method : "POST",
-    headers : {
-        'Content-type': 'application/json',
-        'authorization': cardId
-    },
-  })
-  .then(res => res.json())
-  .then(data =>{
-    if(data!=null){
-      console.log("Deleted SyncTransaction");
-      navigation.navigate('ScanQRCodeScreen');
-    }
-  }) 
-.catch(err=>{
-  console.log(err)
-})
-}
  return (
     <View style={styles.container}>
       <TextInput  style={styles.input}  keyboardType={'numeric'} value = {amount} label="Amount to Deposit" value={amount} onChangeText={onChangeAmount} />
@@ -88,7 +69,7 @@ const redirectToScanQRCode=()=>{
         <View style = {{backgroundColor:"#000000aa", flex:1}}>
         <View style = {styles.container}>
         <Text style = {{ fontSize: 20, margin:40 , textAlign:'center'}}>{output}</Text>
-        <Icon name="check-circle" size={60} onPress= {()=>redirectToScanQRCode()} />
+        <Icon name="check-circle" size={60} onPress= {() => navigation.navigate('ScanQRCodeScreen')} />
         </View>
         </View>
       </Modal>

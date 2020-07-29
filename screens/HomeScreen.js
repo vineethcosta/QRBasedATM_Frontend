@@ -23,14 +23,20 @@ export default function HomeScreen({navigation,route}) {
 
   return ( 
     <View style = {styles.container}>
-      <AwesomeButtonRick  onPress={() => navigation.navigate('Withdraw',{cardId: cardId})}>
+      <AwesomeButtonRick style = {{marginTop:20}} onPress={() => navigation.navigate('Withdraw',{cardId: cardId})}>
         <Text style={{width:200,textAlign:'center'}}>WITHDRAW</Text> 
       </AwesomeButtonRick>
-      <AwesomeButtonRick onPress={()  => navigation.navigate('Deposit',{cardId: cardId})}>
+      <AwesomeButtonRick style = {{marginTop:20}} onPress={()  => navigation.navigate('Deposit',{cardId: cardId})}>
         <Text style={{width:200,textAlign:'center'}}>DEPOSIT</Text>
       </AwesomeButtonRick>
-      <AwesomeButtonRick  onPress={()  => navigation.navigate('BalanceEnquiry',{cardId: cardId})}>
-        <Text style={{width:200,textAlign:'center'}}>BALANCE ENQUIRY</Text>
+      <AwesomeButtonRick style = {{marginTop:20}} onPress={()  => navigation.navigate('BalanceEnquiry',{cardId: cardId})}>
+        <Text style={{width:200,textAlign:'center'}}>BALANCE</Text>
+      </AwesomeButtonRick>
+      <AwesomeButtonRick style = {{marginTop:20}} >
+        <Text style={{width:200,textAlign:'center'}}>CHANGE PIN</Text>
+      </AwesomeButtonRick>
+      <AwesomeButtonRick  style = {{marginTop:20}}>
+        <Text style={{width:200,textAlign:'center'}}>MINI STATEMENT</Text>
       </AwesomeButtonRick>
   </View>
   );
