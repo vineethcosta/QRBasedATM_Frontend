@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, Modal } from 'react-native';
+import {  View, Modal, StyleSheet } from 'react-native';
 import {TextInput,Text, Button} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 export default function BalanceEnquiry({route,navigation}) {
  const  {cardId}  = route.params;
  const [balance, setBalance] = useState("");
@@ -38,7 +39,7 @@ export default function BalanceEnquiry({route,navigation}) {
           .then((responseJson) =>{
             console.log(responseJson)
             if(responseJson.accountDetails!=null){
-              setBalance("Balance:"+responseJson.accountDetails.balance)
+              setBalance("Balance: ₹ "+responseJson.accountDetails.balance)
             }
             setVisible(true)
           })
@@ -69,22 +70,40 @@ export default function BalanceEnquiry({route,navigation}) {
     }
  
  return (
-    <View>
+    <View style={styles.container}>
       <Modal transparent={true} visible= {isVisible} >
         <View style = {{backgroundColor:"#000000aa", flex:1}}>
         <View style = {{backgroundColor:"#ffffff", height: 10,marginLeft:20, marginRight:20,marginTop:275,marginBottom:275,padding:20, borderRadius:20, flex: 1}}>
         <Text style = {{ fontSize: 30, margin:40 , textAlign:'center'}}>{balance}</Text>
-        <Button mode="contained"  onPress= {()=>redirectToScanQRCode()}>OK</Button>
+        <Icon name="check-circle" size={60}  onPress= {()=>redirectToScanQRCode()} />
         </View>
         </View>
       </Modal>
-      <Button mode="contained" onPress= {fetchBalance}>Populate</Button>
+      <Icon  style={{alignItems:"center"}} onPress= {fetchBalance} name="check-circle" size={60} />
       </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center'
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  input: {
+    width: 300,
+    backgroundColor: '#ecf0f1',
+    marginRight: 10,
+  },
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#2c3539',
+    padding: 10,
+    width: 300,
+    marginTop: 16,
   },
 });

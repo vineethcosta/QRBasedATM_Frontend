@@ -1,7 +1,7 @@
 import React , {useState} from  'react';
-import { Modal, Text, View } from 'react-native';
+import { Modal, Text, View, StyleSheet } from 'react-native';
 import {TextInput,HelperText, Button} from 'react-native-paper';
-
+import Icon from 'react-native-vector-icons/FontAwesome5';
 export default function Withdraw({route,navigation}) {
   const  {cardId}  = route.params;
   const [output, setOutput] = useState("");
@@ -51,7 +51,7 @@ export default function Withdraw({route,navigation}) {
       .then(res => res.json())
       .then(data =>{
         if(data!=null){
-          setOutput("Amount Withdrawn:" + data.TransactionDetails.transactionAmount)
+          setOutput("Amount Withdrawn: ₹ " + data.TransactionDetails.transactionAmount)
           console.log(data.TransactionDetails.transactionAmount+"withdraw22")
         }
        setVisible(true)
@@ -81,21 +81,42 @@ export default function Withdraw({route,navigation}) {
 })
 }
  return (
-    <View>
-      <TextInput keyboardType={'numeric'} label="Amount to Withdraw" value={amount} onChangeText={onChangeAmount} />
-      <HelperText type="error" visible={hasErrors()}>
-        Enter valid amount to be withdrawn
-      </HelperText>
+    <View style={styles.container}>
+      <TextInput   style={styles.input}  keyboardType={'numeric'} label="Amount to Withdraw" value={amount} onChangeText={onChangeAmount} />
       <Modal transparent={true} visible= {isVisible} >
         <View style = {{backgroundColor:"#000000aa", flex:1}}>
-        <View style = {{backgroundColor:"#ffffff", height: 10,marginLeft:20, marginRight:20,marginTop:200,marginBottom:275,padding:20, borderRadius:20, flex: 1}}>
-        <Text style = {{ fontSize: 30, margin:40 , textAlign:'center'}}>{output}</Text>
-        <Button mode="contained" onPress= {()=>redirectToScanQRCode()}>OK</Button>
+        <View style={styles.container}>
+        <Text style = {{ fontSize: 20, margin:40 , textAlign:'center'}}>{output}</Text>
+        <Icon name="check-circle" size={60} onPress= {()=>redirectToScanQRCode()} />
         </View>
         </View>
       </Modal>
-      <Button onPress={() => withdrawAmount()}>Withdraw</Button>
+      <Icon style={{alignItems:"center"}} onPress={() => withdrawAmount()} name="check-circle" size={60} />
     </View>
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  input: {
+    width: 300,
+    backgroundColor: '#ecf0f1',
+    marginRight: 10,
+  },
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#2c3539',
+    padding: 10,
+    width: 300,
+    marginTop: 16,
+  },
+});

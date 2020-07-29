@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
-  root: {padding: 20, minHeight: 300},
+  root: {paddingTop: 150, minHeight: 300},
   title: {textAlign: 'center', fontSize: 30},
   fieldRow: {
     marginTop: 20,

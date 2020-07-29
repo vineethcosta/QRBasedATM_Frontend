@@ -1,5 +1,5 @@
 import React , {useState} from  'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View,Image } from 'react-native';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 
 export default function ScanQRCodeScreen({navigation}) {

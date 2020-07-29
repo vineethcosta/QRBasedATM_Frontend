@@ -7,6 +7,7 @@ import {
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 import styles from './styles';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 const CELL_COUNT = 4;
 
 
@@ -105,6 +106,9 @@ export default function PinAuthorizationScreen({route,navigation}) {
   <SafeAreaView style={styles.root}>
   <Text style={styles.title}>Enter Pin</Text>
   <View style={styles.fieldRow}>
+  <Text style={styles.toggle} onPress={toggleMask}>
+      {enableMask ? '👁️' : '👁️'}
+    </Text>
     <CodeField
       ref={ref}
       {...props}
@@ -115,11 +119,9 @@ export default function PinAuthorizationScreen({route,navigation}) {
       textContentType="oneTimeCode"
       renderCell={renderCell}
     />
-    <Text style={styles.toggle} onPress={toggleMask}>
-      {enableMask ? '🙈' : '🐵'}
-    </Text>
+    <Icon onPress={() => {authorizePinFromCardId()}}name="check-circle" size={60} />
   </View>
-  <Button onPress={() => {authorizePinFromCardId()}} title = "OK "> </Button>
+  
 </SafeAreaView>
   );
 };
