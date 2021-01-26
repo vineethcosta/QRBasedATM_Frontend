@@ -21,4 +21,4 @@ Steps to make the project up and running: (Prerequiste : Make sure you have expo
 
 Done!!  You have the app running on your mobile. Happy coding
 
-Please Visit : https://github.com/vineethcosta/QRBasedATM_Backend   for info on the Server hosted on heroku
+Please Visit : https://github.com/vineethcosta/QRCodeBasedATM_Backend  for info on the Server hosted on heroku
